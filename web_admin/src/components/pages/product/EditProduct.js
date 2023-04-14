@@ -12,11 +12,13 @@ import {ToastObjects} from '../../../redux/actions/toastObject';
 
 const EditProduct = ({match}) => {	
   const productId = match.params.id;
+  console.log('productID',productId)
   const [submitted, setSubmitted] = useState(false);  
   const dispatch = useDispatch();
 
   const productEdit = useSelector((state) => state.productEdit);
   const { loading, error, product } = productEdit;
+  console.log('product',productEdit)
 
   const productUpdate = useSelector((state) => state.productUpdate);
   const {
@@ -63,6 +65,7 @@ const EditProduct = ({match}) => {
         e.preventDefault();
         setSubmitted(true); 
         const { title, description, image } = formState.values;
+		console.log('values', formState.values)
         if (title && description && image) {
             dispatch(updateProduct(formState.values));         
             setSubmitted(false);
@@ -110,9 +113,9 @@ const EditProduct = ({match}) => {
 				                                       <textarea rows={5} cols={5} className={'form-control form-control-lg' + (submitted && !formState.values.title ? ' is-invalid' : '')} 
 					                                        name="description"                          
 					                                        onChange={handleChange}
-					                                        value={formState.values.description || ''}
+					                                        value={formState.values.desc || ''}
 					                                        />
-					                                        {submitted && !formState.values.description &&
+					                                        {submitted && !formState.values.desc&&
 					                                            <div className="inline-errormsg">Description is required</div>
 					                                        }
 				                                    </div>
@@ -127,9 +130,9 @@ const EditProduct = ({match}) => {
 				                                       <input type="text" className={'form-control form-control-lg' + (submitted && !formState.values.image ? ' is-invalid' : '')} 
 					                                        name="image" 
 					                                        onChange={handleChange}
-					                                        value={formState.values.image || ''}
+					                                        value={formState.values.img || ''}
 					                                        />
-					                                        {submitted && !formState.values.image &&
+					                                        {submitted && !formState.values.img &&
 					                                            <div className="inline-errormsg">Image is required</div>
 					                                        }
 				                                    </div>
@@ -182,11 +185,24 @@ const EditProduct = ({match}) => {
 				                           <div className="row">
 				                              <div className="col-md-6">
 				                                 <div className="form-group row">
-				                                    <label className="col-sm-3 col-form-label">Category</label>
+				                                    <label className="col-sm-3 col-form-label">Sex</label>
 				                                    <div className="col-sm-9">
-				                                       <select className="form-control" name="category" multiple>
+				                                       <select className="form-control" name="category" >
 				                                          <option value="man">Man</option>
 				                                          <option value="woman">Woman</option>
+				                                       </select>
+				                                    </div>
+				                                 </div>
+				                              </div>				                              
+				                           </div>
+										   <div className="row">
+				                              <div className="col-md-6">
+				                                 <div className="form-group row">
+				                                    <label className="col-sm-3 col-form-label">Sex111</label>
+				                                    <div className="col-sm-9">
+				                                       <select className="form-control" name="category" multiple>
+				                                          <option value="mancx">Man</option>
+				                                          <option value="womancx">Woman</option>
 				                                       </select>
 				                                    </div>
 				                                 </div>

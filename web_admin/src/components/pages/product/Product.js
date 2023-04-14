@@ -7,7 +7,7 @@ import { deleteProduct } from "../../../redux/actions/ProductActions";
 
 
 const Product = (props) => {
-	let {_id, title,image,price,stock} = props.product;
+	let {_id, title,img,price,inStock} = props.product;
 	const dispatch = useDispatch();
 
 	  const deletehandler = (id) => {
@@ -19,9 +19,9 @@ const Product = (props) => {
 		<>
 		    <tr>
               <td>{title}</td>
-              <td><img src={image} /></td>
+              <td><img src={img} /></td>
               <td>{price}</td>
-              <td>{stock}</td>
+              <td>{inStock?'Yes':'Empty'}</td>
               <td><Link
 	                to={`/product/edit/${_id}`}	                
 	              >

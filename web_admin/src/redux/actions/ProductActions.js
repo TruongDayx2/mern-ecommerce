@@ -24,7 +24,7 @@ export const listProducts = (pageNum,productsPerPage,sortBy,searchText) => async
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
-    const responseData = await axios.get(`/products?page=${pageNum}&limit=${productsPerPage}&sortBy=${sortBy}&searchText=${searchText}`);
+    const responseData = await axios.get(`/products/admin?page=${pageNum}&limit=${productsPerPage}&sortBy=${sortBy}&searchText=${searchText}`);
     const data = responseData.data;
     data['sortBy'] = sortBy;
     data['searchText'] = searchText;
@@ -83,14 +83,17 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 };
 
 // Create Product
-export const createProduct = (reqData) => async (dispatch, getState) => {
-    
+export const createProduct = (reqData,user) => async (dispatch, getState) => {
+  const axiosJWT = axios.create()
+
     try {
       dispatch({ type: PRODUCT_CREATE_REQUEST });
 
-      const response = await axios.post(
-        `products/`,
-        reqData
+      const response = await axiosJWT.post(
+        `/products`,
+        reqData,{
+          headers:{authorization:"Bearer "+ user.token}
+        }
       );
 
       const responseData = response.data;

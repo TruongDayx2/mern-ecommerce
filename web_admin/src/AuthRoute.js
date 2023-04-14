@@ -9,11 +9,13 @@ function AuthRoute({ component: Component, ...rest }) {
   if (userInfo){
     isAdmin = (userInfo.data[0].isAdmin === true) ? 1 : 0;
   }
-  
+  console.log("userLogin:",userLogin)
   return (
     <Route
       {...rest}
       component={(props) => {
+  console.log("props:",{...props})
+
         if (isAdmin === 1) {
           return <Redirect to={`/dashboard`} />;          
         } else {
